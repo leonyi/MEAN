@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Deck of Cards</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 'use strict'
+		class Card {
+			constructor(value, suit) {
+				this.value = value;
+				this.suit = suit;
+			}
+
+			get cardSuit(){
+				// Suits in alphabetical order
+				if(this.suit === 1){
+					return "Clubs"
+				} else if(this.suit === 2){
+					return "Diamonds"
+				} else if(this.suit === 3){
+					return "Hearts"
+				} else {
+					return "Spades"
+				}
+	
+			}
+
+			get cardValue(){
+				if(this.value === 1){
+					return "Ace"
+				} else if (this.value === 11){
+					return "Jack"
+				} else if (this.value === 12){
+					return "Queen"
+				} else if (this.value === 13){
+					return "King"
+				} else {
+					return this.value
+				}
+			}
+
+		}
+		class Deck {
+			constructor(){
+				// We start with Ace of Clubs
+				this.value = 1  // Ace
+				this.suit = 1   // Clubs
+				this.total_cards = 52
+
+				this.card_list = []
+
+				for(let i=0; i<52; i++){
+					this.card_list.push(new Card(this.value, this.suit))
+					if (this.value == 13){
+						// Increment the size of suit count.
+						this.suit += 1;
+						// Reset value to 1
+						this.value = 1;
+					} else {
+						this.value += 1;
+					}
+				}
+				console.log(`Size of card_list is ${ this.card_list.length}`)
+				console.log(typeof this.card_list)
+
+			}
+			show(){
+				console.log("Deck contents:\n")
+				for (let c=0; c<this.card_list.length; c++){
+					console.log(`${ this.card_list[c].cardValue }, ${ this.card_list[c].cardSuit }`)
+				}
+			}
+			deal(){
+				return this.card_list.pop()
+			}
+
+			shuffle(){
+				// Shuffles the deck.
+				// Reference: https://bost.ocks.org/mike/shuffle/.
+				let m = this.card_list.length, t, i;
+                while (m) {
+                    i = Math.floor(Math.random() * m--);
+                    t = this.card_list[m];
+                    this.card_list[m] = this.card_list[i];
+                    this.card_list[i] = t;
+                }
+                return this;
+			}
+
+
+		}
+
+		class Player {
+			constructor(name){
+				this.name = name
+				this.hand = []
+			}
+			draw(deck){
+				this.hand.push(deck.deal());
+				return this;
+			}
+			discard(){
+				this.hand.pop();
+				return this;
+			}
+		}
+		let myDeck = new Deck()
+		myDeck.show()
+		myDeck.shuffle()
+
+		let player = new Player("Yanet")
+		player.draw(myDeck).draw(myDeck).draw(myDeck).draw(myDeck).draw(myDeck)
+		console.log(`Size of deck after draw: ${ myDeck.card_list.length }`)
+		console.log(`${ player.name }'s hand (size of ${ player.hand.length }) : `)
+
+		for(let i=0; i<player.hand.length;i++){
+			console.log(`${ player.hand[i].cardValue }, ${player.hand[i].cardSuit}`)
+		}
+
+
+	</script>
+
+</body>
+</html>

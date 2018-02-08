@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ES6 Classes</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// Old ES5 way
+		// function Dot(x, y) {
+		// 	this.x = x
+		// 	this.y = y
+		// }
+		// Dot.prototype.showLocation = function () {
+		// 	console.log("This Dot is at x " + this.x + " and y " + this.y)
+		// }
+		// const dot1 = new Dot(55, 20)
+		// dot.showLocation()
+
+		// New ES6 way.
+		class Dot {
+			constructor(x, y) {
+				this.x = x;
+				this.y = y;
+				console.log("You created a Dot!");
+			}
+			// prototype method
+			showLocation(){
+				// ES6 String Interpolation!
+				console.log(`This ${ this.constructor.name } is at x ${this.x} and y ${this.y}`);
+			}
+			// static method
+			static getHelp() {
+				console.log("This is a Dot class, for created Dots! A Dot takes x and y coordinates, type 'new Dot' to create one!");
+			}
+			// simple method id the parent class
+			parentFunction(){
+				return "This is coming from the parent!"
+			}
+
+		}
+		// child Circle class
+		class Circle extends Dot {
+			constructor(x, y, radius) {
+				// Calls the constructor of the parent class.
+				super(x, y);
+				this.radius = radius;
+			}
+			// simple function in the child class
+			childFunction() {
+				// by using super, we can call the parent method
+				const message = super.parentFunction();
+				console.log(message)
+			}
+
+			// getter
+			get diameter() {
+				return this.radius * 2;
+			}
+		}
+		const circle = new Circle(1, 2, 3);
+		circle.childFunction();
+		console.log(circle.diameter)
+		// We can now create Circles
+		// const circle1 = new Circle(33, 33, 33);
+		// // same attributes as a Dot, plus a radius
+		// console.log(circle1);
+		// // and Circles can access Dot methods
+		// circle1.showLocation();
+
+		// const dot2 = new Dot(5, 13);
+		// dot2.showLocation();
+
+		// const dot3 = new Dot(4, 2);
+		// // we can see showLocation for our instance...
+		// console.log(dot3.showLocation);
+		// // but we can't see getHelp
+		// console.log(dot3.getHelp);
+		// // however, we can call getHelp this way:
+		// Dot.getHelp();
+
+		// Example of setters and getters
+		// class Pizza {
+		//     constructor(radius, slices) {
+		//         this.radius = radius;
+		//         this._slices = slices;
+		//     }
+		//     get slices () { 
+		//         return this._slices; 
+		//     }
+		//     set slices (slices) { 
+		//         this._slices = slices;
+		//     }
+		// };
+	</script>
+
+</body>
+</html>

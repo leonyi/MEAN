@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JS DOM I</title>
+</head>
+<body>
+	<h1>Students</h1>
+	<ul id = "main">
+		<!-- this is empty -->
+	</ul>
+	<script type="text/javascript">
+		// ****** appendList ***** //
+		// function appendList(array, id){
+
+		// 	for(i=0; i<array.length; i++ ){
+		// 		// Creaet an empty li
+		// 		let new_student = document.createElement("li");
+		// 		// Modify the new li's innerHTML content with the string coming from array.
+		// 		new_student.innerHTML = array[i];
+		// 		// Append the new DOM element to the id "main"
+		// 		document.getElementById(target_id).appendChild(new_student)
+		// 	}	
+
+		// };
+		// let students = ["Jeff", "Jenny", "Javier", "Joslyn", "Joe", "Jane", "Django"];
+		// let target_id = "main"
+		// appendList(students, target_id)
+
+		// ****** superAppend ***** //
+		function superAppend(array, element, id) {
+			for(i=0; i<array.length; i++ ){
+				// Creaet an empty li
+				let new_student = document.createElement(element);
+				// Modify the new li's innerHTML content with the string coming from array.
+				new_student.innerHTML = array[i];
+				// Append the new DOM element to the id "main"
+				document.getElementById(id).appendChild(new_student)
+			}	
+
+		};
+		let students = ["Jeff", "Jenny", "Javier", "Joslyn", "Joe", "Jane", "Django"];
+		let element = "li"
+		let target_id = "main"
+		superAppend(students, element, target_id)
+
+	</script>
+</body>
+</html>

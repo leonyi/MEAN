@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JS Intermediate</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// ***** Part I ***** //
+		// function starString(n) {
+		// 	return "*".repeat(n)
+		// }
+		// let stars = starString(8)
+		// console.log(stars)
+
+		// ***** Part II ***** //
+		// function drawStars(array){
+		// 	for(i=0; i<array.length; i++){
+		// 		console.log("*".repeat(array[i]))
+		// 	}
+		// }
+		// let x = [4, 6, 1, 3, 5, 7, 25]
+		// drawStars(x)
+
+		// ***** Part III ***** //
+		function drawStars_modified(array){
+			for(i=0; i<array.length; i++){
+				if (typeof array[i] === "string"){
+					let first_char = array[i].charAt(0).toLowerCase()
+					console.log(first_char.repeat(array[i].length))
+
+				} else {
+					console.log("*".repeat(array[i]))
+				}	
+			}
+		}
+		let x = [4, "Tom", 1, "Michael", 5, 7, "Jimmy Smith"]
+		drawStars_modified(x)
+	</script>
+
+</body>
+</html>
