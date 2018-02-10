@@ -5,7 +5,6 @@ var bodyParser = require("body-parser");
 
 // Var to keep track of how many times '/' has been visited.
 var visitor_count ;
-var my_session;
 
 // Invoke var express and store the resulting application in a var app
 var app = express();
