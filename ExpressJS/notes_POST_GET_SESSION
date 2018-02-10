@@ -1,0 +1,19 @@
+// In Express we will assing all our routing rules using the following syntax:
+// app.HTTP_VERB('URL', function(req, res){}), where the HTTP_VERB is eiter 'get or 'post', etc...
+
+// If we wanted to make a route for creating a new user...
+// root route
+app.get('/', function(req, res){
+	res.render('index', {title: "My Express Project"});
+});
+// route to proecess new user form data:
+app.post('/users', function(req, res) {
+	// code to add user to db goes here
+	// redirect the user ack to the root route.
+	// all we do is specify the URL we want to go to
+	res.redirect('/')
+
+})
+
+
+ 
