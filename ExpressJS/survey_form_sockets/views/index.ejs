@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <title> Survey Form </title>
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Hello Counter!</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="stylesheets/normalize.css">
+  <link rel="stylesheet" href="stylesheets/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <!-- JQuery & Socket.io JS 
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script type ="text/javascript">
+         $(document).ready(function() {
+            // this triggers the connection event in our server!
+            var socket  = io.connect("http://localhost:7010");
+
+             $('#button').click(function (event){
+                event.preventDefault();
+
+                var memission = document.createElement("div");
+                memission.setAttribute("class", "memission");
+                $('.memission').css("background-color", "#37FF56" );
+                $('.memission').css("width", "300px" );
+                $('.memission').css("padding", "10px" );
+                $('.memission').css("left-margin", "0" );
+                $('.memission').css("border", "2px solid" );
+
+                var formData = {
+                  name: $('#name').val(),
+                  location: $('#geo_location').val(),
+                  language: $('#prog_language').val(),
+                  comment: $('#comment').val()
+                };
+
+                // var randomNumber = Math.floor(Math.random()*1001);
+                socket.emit("random_number", {reason: "New form submitted! We need a lucky number generated."});
+                socket.emit("posting_form", formData);
+
+            });
+
+
+            // Data response from the server for the form data.    
+            socket.on('updated_message', function (data){
+                console.log( 'The server says: ' + data);
+                var memission = document.createElement("p");
+                memission.innerHTML =`You emitted the following information to the server:
+                  {
+                    name: ${data.name},
+                    location: ${data.location},
+                    language: ${data.language},
+                    comment: ${data.comment}
+                }`;
+                $(".memission").prepend(memission);
+            });
+
+            // Data response from the server for the lucky number.
+            socket.on('random_number', function(data) {
+              console.log("The lucky number sent by the server is: ", data.response)
+              var randemission = document.createElement("p");
+              randemission.innerHTML = 'Your lucky number emitted by the server  is ' + data.response;
+              $(".memission").prepend(randemission);
+            });
+
+        })
+    </script>
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container">
+        <div class="row">
+            <header>
+              <h2>Survey Form</h2>
+              <div class = "memission"></div>
+            </header>
+            <!-- <form action="/result" method="post" class="forms"> -->
+            <form class="forms" style="margin-top: 15px">
+                Name: <input type="text" name="name" id="name">
+                <div>
+                    Dojo Location: <select name="geo_location" id="geo_location">
+                        <option value="San Jose">San Jose</option>
+                        <option value="Seattle">Seattle</option>
+                        <option value="Bellevue">Bellevue</option>
+                        <option value="Dallas">Dallas</option>
+                    </select>
+                </div>
+                <div>
+                    Favorite Language: <select name="prog_language" id="prog_language">
+                        <option value="Python">Python</option>
+                        <option value="Go">GoLang</option>
+                        <option value="Ruby">Ruby</option>
+                        <option value="Java">Java</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Comment (optional)</label>
+                    <textarea name="comment" rows="10" cols="50" placeholder="Comment" id="comment"></textarea>
+				</div>
+                <!-- ToDo: How do we handle input events! No button!!-->
+                <input type='submit' value="Submit" class="button" id="button">
+
+            </form>
+
+        </div>
+   </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> 
+</body>
+</html>
