@@ -55,7 +55,6 @@
                   comment: $('#comment').val()
                 };
 
-                // var randomNumber = Math.floor(Math.random()*1001);
                 socket.emit("random_number", {reason: "New form submitted! We need a lucky number generated."});
                 socket.emit("posting_form", formData);
 
@@ -64,7 +63,6 @@
 
             // Data response from the server for the form data.    
             socket.on('updated_message', function (data){
-                console.log( 'The server says: ' + data);
                 var memission = document.createElement("p");
                 memission.innerHTML =`You emitted the following information to the server:
                   {
@@ -80,7 +78,7 @@
             socket.on('random_number', function(data) {
               console.log("The lucky number sent by the server is: ", data.response)
               var randemission = document.createElement("p");
-              randemission.innerHTML = 'Your lucky number emitted by the server  is ' + data.response;
+              randemission.innerHTML = 'Your lucky number emitted by the server  is ' + data.response + ".";
               $(".memission").prepend(randemission);
             });
 
