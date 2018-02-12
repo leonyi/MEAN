@@ -1,0 +1,97 @@
+<html>
+<head>
+      <!-- Basic Page Needs
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <meta charset="utf-8">
+      <title>Epic Button Game</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <!-- Mobile Specific Metas
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- FONT
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+      <!-- CSS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <link rel="stylesheet" href="stylesheets/normalize.css">
+      <link rel="stylesheet" href="stylesheets/skeleton.css">
+
+      <!-- Favicon
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <link rel="icon" type="image/png" href="images/favicon.png">
+
+
+      <!-- JQuery & Socket.io JS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+      <script type ="text/javascript">
+             $(document).ready(function (){
+                // this triggers the connection event in our server!
+                var socket  = io.connect("http://localhost:8010");
+
+                 // epic_button pressed event!
+                 $('#epic_button').click(function (event) {
+                    event.preventDefault();
+
+                    var heading_with_count = document.createElement("h4");
+                    heading_with_count.setAttribute("class", "heading_with_count");
+
+                    // Emit after epic button is pressed.
+                    socket.emit('epic_button_clicked', {reason: "A new game is starting!"});
+                 });
+
+                 // Server response to epic button pressed with count.
+                 socket.on('server_response_to_epic', function(data) {
+                    console.log("The count is now: " + data.update);
+                    // var update_count = document.createElement("h4");
+                    document.getElementById("heading_with_count").innerHTML = "The button has been pushed " + data.update + " time(s).";
+                    // update_count.innerHTML = 
+                    // update_count.innerHTML = data.update
+                    // $("#heading_with_count").prepend(update_count);
+
+                 });
+
+                  // reset_button pressed event!
+                 $('#reset_button').click(function(event) {
+                    event.preventDefault();
+                    socket.emit('reset_button_clicked', {reason: "Game over!"});
+
+                 });
+
+                 // Server response to reset_button pressed.
+                 socket.on('server_response_to_reset', function(data) {
+                    console.log("The count has been reset: ", data.reset)
+                   document.getElementById("heading_with_count").innerHTML = "The button has been pushed " + data.reset + " time(s).";
+
+                 })
+
+            }) // End of $(document).ready
+        </script>
+</head>
+<body>
+   
+    <!-- Primary Page Layou	t
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container">
+      <div class="row">
+        <div class="one-half column" style="margin-top: 25%">
+            <h4 id="heading_with_count"></h4>
+            <p style="font-weight: bold;">Push the button to update the count!</p>
+            <div style="display: flex; justify-content: space-between;">
+              <button id="epic_button" style="background-color: blue; color: white">Epic Button</button>
+              <button id="reset_button" style="background-color: red; color: white">Reset Count</button>
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+  <!-- End Document
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
