@@ -1,0 +1,69 @@
+Outline:
+
+1. Have NodeJS render views/index.js, which contains the javaScript code to ask for the user information.
+
+	app.get("/", function(req, res)) {
+	 res.render('index', {})
+	}
+	
+	a. Prompt the user for the name and store it in the "name" variable:
+
+	<script>
+		var name = window.prompt("What is your name?");
+	</script>
+	
+	b. Client listens for  
+	Validates that the name is the proper size
+	b. Takes the user to the "Conversation Board"
+ 	c. If user is a new user, client EMITS message to server "new_user" and pass the name to the server.
+
+2. Server gets the new user's name and stores it
+	a. Stores the name with a sessionID into the users hash:
+
+		var users ={
+			"user_name": name,
+			"session_id": new_user_sessionID
+		}
+
+	b. Server broadcasts that a new user has joined
+
+3. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// NOTE:
+	// Examples of the three types of SERVER emits:
+	// // EMIT:
+	// socket.emit('my_emit_event');
+	// // BROADCAST:
+	// socket.broadcast.emit('my_broadcast_event');
+	// // FULL BROADCAST:
+	// io.emit("my_full_broadcast_event");
+

@@ -1,0 +1,86 @@
+<html>
+<head>
+      <!-- Basic Page Needs
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <meta charset="utf-8">
+      <title>Playing with Sockets</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <!-- Mobile Specific Metas
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- FONT
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+      <!-- CSS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <link rel="stylesheet" href="stylesheets/normalize.css">
+      <link rel="stylesheet" href="stylesheets/skeleton.css">
+
+      <!-- Favicon
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <link rel="icon" type="image/png" href="images/favicon.png">
+
+
+      <!-- JQuery & Socket.io JS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+      <script type ="text/javascript">
+            function show_prompt() {
+                var name = prompt("Please enter your name:");
+                
+                return name
+            }
+
+             $(document).ready(function () {
+                // this triggers the connection event in our server!
+                var socket  = io.connect("http://localhost:8010");
+
+                // Show prompt
+                var validUser = false;
+                while (!validUser) {
+                  var user_name = show_prompt();
+                  if (user_name) { validUser = true ; }
+                } 
+                console.log("New user: ", user_name)
+  
+                socket.emit("new_user", {user: user_name})
+
+                // Data response from the server after a new user is added.
+                socket.on('new_user_response', function(data){
+                  console.log("A new user is being welcomed! ", data.response)
+                  // var mod = document.createElement("h5");
+                  document.getElementById("mod").innerHTML = 'New user joined:  ' + data.response + '. Wecome!'
+                  // mod.innerHTML = 'New user joined:  ' + data.response + '. Wecome!'
+                  // $("#mod").prepend(nodes...: Node|DOMString)
+                })
+
+
+            })
+        </script>
+</head>
+<body>
+	  <!-- Primary Page Layout
+	  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	  <div class="container">
+	    <div class="row">
+	      <div class="one-half column" style="margin-top: 25%">
+    		<h4>Conversation Board</h4>
+        <h6 id="mod"></h6>
+        <div id="conversation_boad"></div>
+        <div>
+            <textarea name="comment" cols="80" placeholder="Enter your message here." id="comment"></textarea>
+        </div>
+            <input type='submit' value="Submit" class="button" id="submit_button">
+	      </div>
+	    </div>
+	  </div>
+
+	<!-- End Document
+	  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
