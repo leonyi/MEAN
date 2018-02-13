@@ -1,0 +1,57 @@
+<html>
+<head>
+      <!-- Basic Page Needs
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <meta charset="utf-8">
+      <title>Quoting Dojo</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <!-- Mobile Specific Metas
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- FONT
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+      <!-- CSS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <link rel="stylesheet" href="stylesheets/normalize.css">
+      <link rel="stylesheet" href="stylesheets/skeleton.css">
+
+      <!-- Favicon
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <link rel="icon" type="image/png" href="images/favicon.png">
+
+
+      <!-- JQuery & Socket.io JS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+      <script type ="text/javascript"></script>
+</head>
+<body>
+	  <!-- Primary Page Layout
+	  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	  <div class="container">
+	    <div class="row">
+	      <div class="one-half column" style="margin-top: 25%">
+          <div style="display: flex; justify-content: space-around;">
+		        <h4> Here are some awesome quotes! </h4>
+            <a class="button" href="http://localhost:8000">Add More Quotes</a>
+          </div>
+          <% data.forEach(function(quote) { %>
+          <div>
+            <p> <%= quote.quote %> </p>
+		        <p style="border-bottom: 2px solid black"> <%= quote.poster %> at <%= quote.createdAt %></p>
+          </div>
+          <% }) %>
+	      </div>
+	    </div>
+	  </div>
+
+	<!-- End Document
+	  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
