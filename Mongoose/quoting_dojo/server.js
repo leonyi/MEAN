@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 // support encoded bodies
 app.use(bodyParser.urlencoded({extended: true}));
 
-// Define the static folder.
+/*--------- Static Folder ---------*/
 app.use(express.static(path.join(__dirname, './static')));
 
 // Setup ejs templating and define the views folder.

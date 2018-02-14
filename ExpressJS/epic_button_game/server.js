@@ -59,3 +59,12 @@ io.sockets.on('connection', function(socket) {
 	});
 
 }) 
+
+// NOTE:
+	// Examples of the three types of emits:
+	// // EMIT:
+	// socket.emit('my_emit_event');
+	// // BROADCAST:
+	// socket.broadcast.emit('my_broadcast_event');
+	// // FULL BROADCAST:
+	// io.emit("my_full_broadcast_event");
