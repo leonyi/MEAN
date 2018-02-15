@@ -1,0 +1,56 @@
+<html>
+<head>
+      <!-- Basic Page Needs
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <meta charset="utf-8">
+      <title>Playing with Sockets</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <!-- Mobile Specific Metas
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- FONT
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+      <!-- CSS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <link rel="stylesheet" href="stylesheets/normalize.css">
+      <link rel="stylesheet" href="stylesheets/skeleton.css">
+
+      <!-- Favicon
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <link rel="icon" type="image/png" href="images/favicon.png">
+
+
+      <!-- JQuery & Socket.io JS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+      <script type ="text/javascript">
+             $(document).ready(function() {
+                // this triggers the connection event in our server!
+                var socket  = io.connect();
+                // we'll write all the socket stuff after the above line!
+            })
+        </script>
+</head>
+<body>
+	  <!-- Primary Page Layout
+	  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	  <div class="container">
+	    <div class="row">
+	      <div class="one-half column" style="margin-top: 25%">
+		<h4>Basic Page</h4>
+		<p>This index.html page is a placeholder with the CSS, font and favicon. It's just waiting for you to add some content! If you need some help hit up the <a href="http://www.getskeleton.com">Skeleton documentation</a>.</p>
+	       <button>I AM A BUTTON!</button>
+	      </div>
+	    </div>
+	  </div>
+
+	<!-- End Document
+	  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

@@ -34,7 +34,7 @@ app.get('/', function(req, res) {
 
 // Other Requests
 // Create
-app.get('/new/:name', function(req, res) {
+app.post('/new/:name', function(req, res) {
 	console.log("Request to add new user: ", req.params.name);
 	let jonser = new Jonser({name: req.params.name});
 	jonser.save(function(err) {
@@ -49,7 +49,7 @@ app.get('/new/:name', function(req, res) {
 })
 
 // Delete
-app.get('/remove/:name', function(req, res) {
+app.delete('/remove/:name', function(req, res) {
 	console.log("Processing request to remove: ", req.params.name);
 	Jonser.remove({name: req.params.name}, function(err, jonser) {
 		if(err) {
@@ -88,21 +88,9 @@ mongoose.connect('mongodb://localhost/jonesers');
 
 // Creating the Mongoose Schea //
 //
-var nameValidator = [
-  validate({
-    validator: 'isLength',
-    arguments: [3, 50],
-    message: 'Name should be between {ARGS[0]} and {ARGS[1]} characters',
-  }),
-  // validate({
-  //   validator: 'isAlphanumeric',
-  //   passIfEmpty: true,
-  //   message: 'Name should contain alpha-numeric characters only',
-  // }),
-]
 // Schema object constructor //
 var JonserSchema = new mongoose.Schema( {
-	  name: {type: String, required: true, validate: nameValidator},
+	  name: {type: String, required: true,  minlength: 6},
 	},
 	{ timestamps: true }
 )
