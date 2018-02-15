@@ -1,9 +1,4 @@
 // Require all the necessary modules
-const express = require('express'),
-      bodyParser = require('body-parser'),
-      mongoose = require('mongoose'),
-      Quote = mongoose.model('Quote') 
-
 /*--------- Controllers Config ---------*/
 var quotes = require('../controllers/quotes.js');
 
