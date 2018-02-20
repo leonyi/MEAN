@@ -20,4 +20,4 @@ The script runs well on MACOSX and Linux.
 # ToDo:
 * modify boostrap script to take project source files as an argument and delete all those absolute path definitions.
 * prettify the script: refactor, etc.
-* Evolve this to use ansible or something along those lines as needed to share
+* Evolve this to use ansible, or something along those lines, as needed to setup a repeatable dev environment deployment for MEAN. 
