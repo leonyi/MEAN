@@ -15,7 +15,7 @@ I will add details on how to install this as time permits.  However, you  need t
   ./bootstrap_mean_project.sh your_project_name
 
 
-The script runs well on MACOSX and Linux.  This version is hacky so we 
+The script runs well on MACOSX and Linux. 
 
 # ToDo:
 * modify boostrap script to take project source files as an argument and delete all those absolute path definitions.
