@@ -1,0 +1,5 @@
+# Bash Script to boostrap an initial DEV environment for a MEAN project.
+
+# ToDo:
+* modify boostrap script to take project source files as an argument
+* prettify the script: refactor, etc.
