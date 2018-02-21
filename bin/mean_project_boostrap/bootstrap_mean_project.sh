@@ -56,7 +56,7 @@ else
 	log setup_server_dir_structure $project_name
 
 	decorate "3. Installing the base modules under  $PROJECT_HOME/$project_name"
-	log cd $PROJECT_HOME/$project_name/server &&  for p in express ejs body-parser mongoose ;do npm init -y; npm install $p --save;done
+	log cd $PROJECT_HOME/$project_name/server &&  for p in express ejs body-parser mongoose morgan ;do npm init -y; npm install $p --save;done
 
 	decorate "4. Installing mongoose-validator under  $PROJECT_HOME/$project_name"
 	log cd $PROJECT_HOME/$project_name/server && npm install mongoose-validator -S

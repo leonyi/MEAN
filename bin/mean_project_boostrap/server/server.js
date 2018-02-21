@@ -1,9 +1,13 @@
 // Require all the necessary modules
-var express = require('express');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var path = require("path");
-var port = process.env.PORT || 8020; 
+var express 	= require('express');
+var bodyParser 	= require('body-parser');
+var mongoose 	= require('mongoose');
+var path 	= require("path");
+var morgan     	= require('morgan');
+var port 	= process.env.PORT || 8020; 
+
+// Set debug level
+mongoose.set('debug', true);
 
 // Instantiate an express app
 var app = express();
